@@ -1,0 +1,60 @@
+#include <iostream>
+#include <set>
+#include <queue>
+#include <vector>
+using namespace std;
+const int NMAX = 5 * 100002;
+set<int> g[NMAX];
+
+void solve() {
+    int n, m;
+    cin >> n >> m;
+    for (int i = 0; i < n; ++i) g[i].clear();
+    for (int i = 0; i < m; ++i) {
+        int u, v;
+        cin >> u >> v;
+        --u, --v;
+        g[u].insert(v);
+        g[v].insert(u);
+    }
+    int s;
+    cin >> s;
+    --s;
+    queue<int> q;
+    q.push(s);
+    vector<int> dist(n, -1);
+    set<int> openSet;
+    for (int i = 0; i < n; ++i)
+        if (i != s) openSet.insert(i);
+    vector<int> buf;
+    dist[s] = 0;
+    while (!q.empty()) {
+        int v = q.front(); q.pop();
+        buf.clear();
+        for (int u : openSet) {
+            if (g[v].find(u) == g[v].end()) {
+                dist[u] = dist[v] + 1;
+                q.push(u);
+                buf.push_back(u);
+            }
+        }
+        for (int u : buf) openSet.erase(u);
+    }
+    bool first = true;
+    for (int i = 0; i < n; ++i) {
+        if (i != s) {
+            if (!first) cout << " ";
+            first = false;
+            cout << dist[i];
+        }
+    }
+    cout << endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    int tc;
+    cin >> tc;
+    for (int i = 0; i < tc; ++i) solve();
+    return 0;
+}
