@@ -1,0 +1,56 @@
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <algorithm>
+#include <map>
+#include <set>
+#include <vector>
+#include <string>
+
+using namespace std;
+typedef long long ll;
+
+void run()
+{
+    ll N, M, S;
+    cin >> N >> M >> S;
+
+    ll blen = S - (N - 2);
+    ll nedge = ((N - 1) * (N - 2)) / 2;
+
+    ll ans;
+    if (M > nedge)
+    {
+        ll bremain = M - nedge;
+        if ((N - 1) * bremain < M)
+        {
+            ans = nedge + (M - nedge) * blen;
+        }
+        else
+        {
+            ll cval = S - (N - 1);
+            ans = M + (M * (cval / (N - 1)));
+            cval %= N - 1;
+
+            ll lval = cval * bremain;
+            ll rval = 1e18;
+            if (cval)
+            {
+                rval = bremain + (cval - 1) * (N - 2) - (cval - 1) * (cval - 2) / 2;
+            }
+            ans += min (lval, rval);
+        }
+    }
+    else
+    {
+        ans = (M - 1) + blen;
+    }
+    cout << ans << "\n";
+}
+
+int main()
+{
+    int ntest; cin >> ntest;
+    for (int test = 0; test < ntest; test++)
+        run();
+}
