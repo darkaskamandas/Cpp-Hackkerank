@@ -1,0 +1,41 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <set>
+#include <map>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+      int q,ch,y,p=0;
+      string x;
+      map<string,int> m;
+      cin>>q;
+      while(q--)
+          {
+              cin>>ch;
+             if(ch==1)
+                 {
+                     cin>>x>>y;
+                    map<string,int>::iterator it=m.find(x);
+                   if(it==m.end()) 
+                   m.insert(make_pair(x,y));
+                   else
+                    m[x]=m[x]+y;
+             }
+          else if(ch==2)
+              {
+                cin>>x;
+                 m.erase(x);
+          }
+          else if(ch==3)
+              {
+                 cin>>x;
+                cout<<m[x]<<endl;
+          }
+      }
+    return 0;
+}

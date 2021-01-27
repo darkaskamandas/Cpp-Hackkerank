@@ -1,0 +1,3 @@
+    cout << setw(0) << nouppercase << setiosflags(ios::showbase) << hex << long(A) << resetiosflags(ios::showbase) << endl;
+    cout << showpos << right << setw(15) << setfill('_') << fixed << setprecision(2) << B << noshowpos << endl;
+    cout << scientific << uppercase << setprecision(9) << C << endl;
