@@ -1,0 +1,55 @@
+class Person {
+public:
+	int id;
+	string name;
+	int age;
+	virtual void getdata() {
+		cin >> name >> age;
+	}
+	virtual void putdata() const {
+		cout << name << " " << age;
+	}
+};
+
+class Professor : public Person{
+	int publications;
+	static int cur_id;
+public:
+	Professor() {
+		id = cur_id++;
+	}
+	void getdata() {
+		Person::getdata();
+		cin >> publications;
+	}
+	void putdata() const {
+		Person::putdata();
+		cout << " " << publications << " " << id << endl;
+	}
+};
+
+int Professor::cur_id = 1;
+
+class Student : public Person {
+	int marks[6];
+	static int cur_id;
+	int sum;
+public:
+	Student() {
+		id = cur_id++;
+	}
+	void getdata() {
+		Person::getdata();
+		sum = 0;
+		for (int i = 0; i < 6; i++) {
+			cin >> marks[i];
+			sum += marks[i];
+		}
+	}
+	void putdata() const {
+		Person::putdata();
+		cout << " " << sum << " " << id << endl;
+	}
+};
+
+int Student::cur_id = 1;
