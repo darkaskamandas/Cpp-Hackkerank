@@ -1,0 +1,34 @@
+class Box {
+//Implement the class Box  
+//l,b,h are integers representing the dimensions of the box
+private:
+   int l, b, h;
+// The class should have the following functions : 
+public:
+// Constructors: 
+   Box() : l(0), b(0), h(0) { ++BoxesCreated; }
+   Box(int _l, int _b, int _h) : l(_l), b(_b), h(_h) { ++BoxesCreated; }
+   Box(const Box &rhs) : l(rhs.l), b(rhs.b), h(rhs.h) { ++BoxesCreated; }
+
+// Destructor
+   ~Box() { ++BoxesDestroyed; }
+
+   int getLength() { return l; }
+   int getBreadth () { return b; }
+   int getHeight () { return h; }
+   long long CalculateVolume() { return ((long long)l)*((long long)b)*((long long)h); }
+
+//Overload operator < as specified
+   bool operator <(const Box &rhs) {
+       return (l < rhs.l || (l == rhs.l &&
+         (b < rhs.b || b == rhs.b && h < rhs.h)));
+   }
+
+//Overload operator << as specified
+   std::ostream &print(std::ostream &os) const { 
+      os << l << ' ' << b << ' ' << h;
+      return os;  
+   }
+};
+// cout<<B should print B.l, B.b and B.h on a single line separated by spaces.
+std::ostream &operator <<(std::ostream &os, Box box) { return box.print(os); }

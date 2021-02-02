@@ -1,0 +1,11 @@
+/* Define the exception here */
+
+class BadLengthException {
+public:
+    BadLengthException(int n): _n(n) {}
+    string what() {
+        return to_string(_n);
+    }
+private:
+    int _n;
+};
