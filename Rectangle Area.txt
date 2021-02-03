@@ -1,0 +1,18 @@
+class Rectangle
+{
+public:
+    Rectangle() = default;
+    virtual void display() const { std::cout << _width << " " << _height << std::endl; }
+    int area() const { return _width * _height; }
+protected:
+    int _width = 0;
+    int _height = 0;
+};
+
+class RectangleArea : public Rectangle
+{
+public:
+    RectangleArea() = default;
+    virtual void display() const override { std::cout << area() << std::endl; }
+    void read_input() { std::cin >> _width >> _height; }
+};
