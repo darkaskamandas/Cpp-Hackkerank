@@ -1,0 +1,15 @@
+Complex operator +(Complex a,Complex b){
+    Complex ans={a.a+b.a,a.b+b.b};
+    return ans;
+}
+/*
+void operator <<(Complex a){
+    cout<<a.a<<"+i"<<a.b;
+}
+*/
+std::ostream& operator<<(std::ostream& os, const Complex& a)
+{
+    // write obj to stream
+    cout<<a.a<<"+i"<<a.b;
+    return os;
+}

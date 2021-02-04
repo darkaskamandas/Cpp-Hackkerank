@@ -1,0 +1,43 @@
+struct Workshop {
+    int startTime, duration, endTime;
+};
+
+struct Available_Workshops {
+    int N;
+    Workshop *w;
+};
+
+Available_Workshops *initialize(int start_time[], int duration[], int N) {
+    Available_Workshops *aw = new Available_Workshops();
+    aw->N = N;
+    aw->w = new Workshop[N];
+    for (int i = 0; i < N; i++) {
+        aw->w[i].startTime = start_time[i];
+        aw->w[i].duration = duration[i];
+        aw->w[i].endTime = start_time[i] + duration[i];
+    }
+    return aw;
+}
+
+int CalculateMaxWorkshops(Available_Workshops *aw) {
+    int curStartTime = 0;
+    int minEndTime = aw->w[0].endTime;
+    int nWorkshops = 0;
+    while(1) {
+        bool foundOne = false;
+        bool min = false;
+        for (int i = 0; i < aw->N; i++) {
+            if (aw->w[i].startTime >= curStartTime) {
+                foundOne = true;
+                if (!min || aw->w[i].endTime < minEndTime) {
+                    minEndTime = aw->w[i].endTime;
+                    min = true;
+                }
+            }
+        }
+        curStartTime = minEndTime;
+        if (!foundOne) break;
+        nWorkshops++;
+    }
+    return nWorkshops;
+}

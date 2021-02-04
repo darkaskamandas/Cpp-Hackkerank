@@ -1,0 +1,11 @@
+class Matrix{
+public:
+    vector<vector<int>> a;
+};
+
+Matrix operator +(Matrix a,Matrix b){
+for(int i = 0 ; i < a.a.size() ; i++)
+    for(int j = 0 ; j < a.a[0].size() ; j++)
+        a.a[i][j] += b.a[i][j];
+return a;
+}
