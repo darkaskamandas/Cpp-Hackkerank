@@ -1,0 +1,10 @@
+import sys
+
+
+h = map(int,raw_input().strip().split(' '))
+word = raw_input().strip()
+maxi=0
+for i in word
+    maxi=max(maxi,h[ord(i)-ord('a')])
+    
+print maxilen(word)

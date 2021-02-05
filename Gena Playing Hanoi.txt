@@ -1,0 +1,54 @@
+#include <cstdio>
+#include <iostream>
+#include <ctime>
+#include <iomanip>
+#include <cstdlib>
+#include <algorithm>
+#include <vector>
+#include <set>
+#include <map>
+#include <string>
+#include <cstring>
+using namespace std;
+
+int n, a[100], dis[2000000], de[2000000], di[100];
+
+int main() {
+	scanf("%d", &n);
+	int x = 0;
+	for (int i = 1; i <= n; i++) {
+		scanf("%d", &a[i]);
+	}
+	for (int i = n; i >= 1; i--)
+		x = x * 4 + a[i] - 1;
+	int q = 1, h = 1;
+	de[1] = x;
+
+	for (int i = 0; i < (1 << 20); i++)
+		dis[i] = 1e9;
+	dis[x] = 0;
+	
+	for (q = 1; q <= h; q++) {
+		int x = de[q];
+		for (int i = 0; i < n; i++)
+			a[i] = x % 4, x /= 4;
+		for (int i = 0; i < 4; i++)
+			di[i] = n + 1;
+		for (int i = n - 1; i >= 0; i--)
+			di[a[i]] = i;
+		for (int i = 0; i < 4; i++)
+		if (di[i] <= n)
+			for (int j = 0; j < 4; j++)
+				if (i != j && di[i] <= di[j]) {
+					int y = de[q] - (i - j) * (1 << (di[i] * 2));
+					if (dis[de[q]] + 1 < dis[y]) {
+						h += 1;
+						de[h] = y;
+						dis[y] = dis[de[q]] + 1;
+						// printf("%d %d\n", y, dis[y]);
+					}
+				}
+	}
+
+	printf("%d\n", dis[0]);
+}
