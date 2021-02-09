@@ -1,0 +1,35 @@
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+   int N;
+   cin >> N;
+   
+   vector<int> V(N);
+   
+   for(auto & v : V)
+      cin >> v;
+   
+   int x;
+   cin >> x;
+   
+   int a, b;
+   cin >> a >> b;
+   
+   
+   V.erase(V.begin() + (x-1));
+   V.erase(V.begin() + (a-1), V.begin() + (b-1));
+   
+   cout << V.size() << endl;
+   
+   for(const auto & v : V)
+      cout << v << ' ';
+   
+   cout << endl;   
+   
+   return 0;
+}
