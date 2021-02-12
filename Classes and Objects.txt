@@ -1,14 +1,17 @@
 class Student {
-    int totalScore = 0;
+    private:
+    int scores[5];
     public:
-    void Input() {
+    void input() {
         for (int i = 0; i < 5; i++) {
-            int x;
-            cin >> x;
-            totalScore += x;
+            cin >> scores[i];
         }
     }
-    int CalculateTotalScore() {
-        return totalScore;
-    }   
+    int calculateTotalScore() {
+        int counter = 0;
+        for (int i = 0; i < 5; i++) {
+            counter += scores[i];
+        }
+        return counter;
+    }
 };
