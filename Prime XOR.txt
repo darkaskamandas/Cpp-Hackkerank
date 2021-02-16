@@ -1,0 +1,46 @@
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <algorithm>
+#include <iostream>
+#include <utility>
+#include <vector>
+using namespace std;
+int n;
+const int mo=1000000007;
+
+int a[111111];
+int npr[11111];
+int vis[5555];
+int f[2][10000];
+int main() {
+    npr[1]=1;
+	for (int i=2;i<=10000;i++){
+		for (int j=i+i;j<=10000;j+=i)npr[j]=1;
+	}
+	int q;scanf("%d",&q);
+	while(q--){
+		scanf("%d",&n);
+		memset(vis,0,sizeof(vis));
+		memset(f,0,sizeof(f));
+		for (int i=1;i<=n;i++){
+			int x;scanf("%d",&x);
+			vis[x]++;
+		}
+		int *g=f[0],*h=f[1];
+		g[0]=1;
+		for (int i=3500;i<=4500;i++)if(vis[i]){
+				int qu,buqu;
+				buqu=vis[i]/2+1;
+				qu=vis[i]+1-buqu;
+				swap(g,h);
+				for (int j=0;j<8192;j++)g[j]=(1ll*buqu*h[j]+1ll*qu*h[j^i])%mo;
+		}
+		int an=0;
+		for (int i=2;i<8192;i++)if(!npr[i]){
+				an=(an+g[i])%mo;
+		}
+		printf("%d\n",an);
+	}
+	return 0;
+}
