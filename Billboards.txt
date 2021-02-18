@@ -1,0 +1,25 @@
+#include <iostream>
+#include <list>
+const int maxn = 100001;
+long long mindec[maxn];
+
+long long answer;
+
+int main(){
+        int n,k;
+        std::cin>>n>>k;
+        std::list<int> prev;
+        mindec[0] = 0;
+        prev.push_back(0);
+        for (int i=1; i<=n; ++i){
+                long long v;
+                std::cin>>v;
+                answer += v;
+                if (prev.front() < i-k-1) prev.pop_front();
+                mindec[i] = v + mindec[prev.front()];
+                while (! prev.empty() && mindec[prev.back()] >= mindec[i]) prev.pop_back();
+                prev.push_back(i);
+        }
+        if (prev.front() < n-k) prev.pop_front();
+        std::cout<<answer-mindec[prev.front()]<<std::endl;
+}
